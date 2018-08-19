@@ -30,27 +30,25 @@ def get_html(url):
 def get_data_href(html):
 
     soup = BeautifulSoup(html, 'html.parser')
-    target_date = []
-    target_href = []
 
     target_all_a = soup.find_all('a')
     target_text = '中国外汇交易中心受权公布人民币汇率中间价公告">'
+    target_date = []
+    target_href = []
     for item in target_all_a:
         item = str(item)
         try:
             target_href_pos = re.search(target_text, item).span()
             if target_href_pos:
+                target_href_pos2 = re.search('/zhengcehuobisi/\w*/\w*/\w*/\w*/index.html', item).span()
+                target_href.append(item[target_href_pos2[0]:target_href_pos2[1]])
                 target_date.append(item[107:target_href_pos[0]])
-                target_href.append(item[9:target_href_pos[0]-53])
-                print('date: ', item[107:target_href_pos[0]])
-                print('href: ', item[9:target_href_pos[0]-53])
         except:
             continue
 
     # 现在直接返回list中最新的0号位置即可，如果以后有改变，再升级优化成时间匹配
 
     return target_date[0], target_href[0]
-
 
 
 def deal_source(target_date, target_href):
@@ -80,9 +78,7 @@ def deal_source(target_date, target_href):
         else:
             rate_key.append(item)
         count = count + 1
-    print(source_text_str)
     rate_dict = dict(zip(rate_key, rate_value))
-    print(rate_dict)
     for item in rate_dict.keys():
         print(item, ':', rate_dict[item])
     return rate_key, rate_value, target_date
@@ -101,3 +97,4 @@ if __name__ == '__main__':
     mail_content = 'chiara 小主，这是你的汇率报表，请查收。'
     mm = Mailer(mail_to_list, mail_title, mail_content)
     res = mm.send_mail()
+    print(res)
