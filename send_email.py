@@ -15,7 +15,7 @@ class Mailer(object):
 
         self.mail_host = "smtp.exmail.qq.com"
         self.mail_user = "h@0920er.com"
-        self.mail_pass = "************"
+        self.mail_pass = "QZ6BH2nw9yaCPgbf"
         self.mail_postfix = "@qq.com"
 
     def send_mail(self):
@@ -38,6 +38,7 @@ class Mailer(object):
         xlsx_part = MIMEApplication(open('chiara.xls', 'rb').read())
         xlsx_part.add_header('Content-Disposition', 'attachment', filename='chiara.xls')
         msg.attach(xlsx_part)
+        print("test4")
 
         # mp3类型的附件
         # mp3part = MIMEApplication(open('kenny.mp3', 'rb').read())
@@ -52,8 +53,10 @@ class Mailer(object):
         try:
             s = smtplib.SMTP()  # 创建邮件服务器对象
             s.connect(self.mail_host)  # 连接到指定的smtp服务器。参数分别表示smpt主机和端口
+            print("test6")
             s.login(self.mail_user, self.mail_pass)  # 登录到你邮箱
-            s.sendmail(me, self.mail_list, msg.as_string())  # 发送内容
+            print("test5")
+	    s.sendmail(me, self.mail_list, msg.as_string())  # 发送内容
             s.close()
             return True
         except Exception as e:

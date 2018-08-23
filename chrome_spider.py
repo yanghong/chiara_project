@@ -96,5 +96,7 @@ if __name__ == '__main__':
     mail_title = 'Rate'
     mail_content = 'chiara 小主，这是你的汇率报表，请查收。'
     mm = Mailer(mail_to_list, mail_title, mail_content)
+    print("test3")
     res = mm.send_mail()
+    print("test2")
     print(res)
