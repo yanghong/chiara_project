@@ -5,6 +5,7 @@ import smtplib
 from email.mime.multipart import MIMEMultipart
 from email.mime.text import MIMEText
 from email.mime.application import MIMEApplication
+from smtplib import SMTP_SSL
 
 
 class Mailer(object):
@@ -51,12 +52,17 @@ class Mailer(object):
         # msg.attach(part)
 
         try:
-            s = smtplib.SMTP()  # 创建邮件服务器对象
-            s.connect(self.mail_host)  # 连接到指定的smtp服务器。参数分别表示smpt主机和端口
+            print("test7")
+            # s = smtplib.SMTP()  # 创建邮件服务器对象
+            s = SMTP_SSL(self.mail_host)
+            s.set_debuglevel(1)
+            s.ehlo(self.mail_host)
+            print("test8")
+            # s.connect(self.mail_host)  # 连接到指定的smtp服务器。参数分别表示smpt主机和端口
             print("test6")
             s.login(self.mail_user, self.mail_pass)  # 登录到你邮箱
             print("test5")
-	    s.sendmail(me, self.mail_list, msg.as_string())  # 发送内容
+            s.sendmail(me, self.mail_list, msg.as_string())  # 发送内容
             s.close()
             return True
         except Exception as e:
