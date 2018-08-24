@@ -39,7 +39,6 @@ class Mailer(object):
         xlsx_part = MIMEApplication(open('chiara.xls', 'rb').read())
         xlsx_part.add_header('Content-Disposition', 'attachment', filename='chiara.xls')
         msg.attach(xlsx_part)
-        print("test4")
 
         # mp3类型的附件
         # mp3part = MIMEApplication(open('kenny.mp3', 'rb').read())
@@ -52,18 +51,15 @@ class Mailer(object):
         # msg.attach(part)
 
         try:
-            print("test7")
             # s = smtplib.SMTP()  # 创建邮件服务器对象
             s = SMTP_SSL(self.mail_host)
             s.set_debuglevel(1)
             s.ehlo(self.mail_host)
-            print("test8")
             # s.connect(self.mail_host)  # 连接到指定的smtp服务器。参数分别表示smpt主机和端口
-            print("test6")
             s.login(self.mail_user, self.mail_pass)  # 登录到你邮箱
-            print("test5")
             s.sendmail(me, self.mail_list, msg.as_string())  # 发送内容
             s.close()
+            print("Send success!!")
             return True
         except Exception as e:
             print(str(e))

@@ -78,6 +78,8 @@ def deal_source(target_date, target_href):
         else:
             rate_key.append(item)
         count = count + 1
+    for i in range(len(rate_key)):
+        rate_key[i] = re.sub('元', '', rate_key[i])
     rate_dict = dict(zip(rate_key, rate_value))
     for item in rate_dict.keys():
         print(item, ':', rate_dict[item])
@@ -96,7 +98,5 @@ if __name__ == '__main__':
     mail_title = 'Rate'
     mail_content = 'chiara 小主，这是你的汇率报表，请查收。'
     mm = Mailer(mail_to_list, mail_title, mail_content)
-    print("test3")
     res = mm.send_mail()
-    print("test2")
     print(res)
