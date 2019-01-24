@@ -14,10 +14,9 @@ class Mailer(object):
         self.mail_title = mail_title
         self.mail_content = mail_content
 
-        self.mail_host = "smtp.exmail.qq.com"
-        self.mail_user = "h@0920er.com"
-        self.mail_pass = "邮箱密码"
-        self.mail_postfix = "@qq.com"
+        self.mail_host = "smtp.163.com"
+        self.mail_user = "hunteryoung940115@163.com"
+        self.mail_pass = "15224005338hh"
 
     def send_mail(self):
         me = self.mail_user + "<" + self.mail_user + ">"
