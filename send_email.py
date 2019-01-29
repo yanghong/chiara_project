@@ -16,7 +16,7 @@ class Mailer(object):
 
         self.mail_host = "smtp.163.com"
         self.mail_user = "hunteryoung940115@163.com"
-        self.mail_pass = "15224005338hh"
+        self.mail_pass = "有道云笔记"
 
     def send_mail(self):
         me = self.mail_user + "<" + self.mail_user + ">"
